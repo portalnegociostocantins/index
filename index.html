@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#08291f">
+    <title>Portal Negócios Tocantins | Empresas, serviços e profissionais do Tocantins</title>
+    <meta name="description" content="Encontre empresas, serviços e profissionais em todo o Tocantins. Busque por categoria e escolha o município onde você precisa.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231fa75a'/%3E%3Ccircle cx='50' cy='50' r='20' fill='%23f6b92b'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="demo-bar" id="demo-bar" hidden>
+        <i class="fas fa-flask"></i> Modo demonstração: as empresas exibidas são exemplos fictícios.
+    </div>
+
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a class="logo" href="index.html" aria-label="Portal Negócios Tocantins">
+                <span class="logo-mark"><i class="fas fa-location-dot"></i></span>
+                <span class="logo-text"><strong>Negócios</strong><small>TOCANTINS</small></span>
+            </a>
+
+            <nav class="nav" id="nav" aria-label="Menu principal">
+                <a href="#sobre">Sobre</a>
+                <div class="dropdown" id="dd-empresas">
+                    <button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">Empresas <i class="fas fa-chevron-down"></i></button>
+                    <div class="dd-menu" id="dd-menu"></div>
+                </div>
+                <a href="#categorias">Serviços</a>
+                <a href="#contato">Contato</a>
+                <a href="#" class="nav-login" id="btn-entrar" hidden><i class="fas fa-user"></i> Entrar</a>
+                <a href="#cadastrar" class="btn btn-green btn-sm" id="btn-cadastrar"><i class="fas fa-location-dot"></i> Cadastrar negócio</a>
+            </nav>
+
+            <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <main>
+        <!-- ========== HERO ========== -->
+        <section class="hero" id="inicio">
+            <div class="hero-mosaic" id="hero-mosaic" aria-hidden="true"></div>
+            <div class="hero-shade"></div>
+
+            <div class="container hero-inner">
+                <h1 id="hero-title">Empresas, serviços e profissionais do Tocantins</h1>
+                <p class="hero-sub" id="hero-sub">Tudo o que você precisa em um único lugar. Busque já!</p>
+
+                <div class="search-wrap">
+                    <div class="search-label"><i class="fas fa-bullhorn"></i> Empresas e Profissionais</div>
+                    <form class="search" id="search-form" role="search" autocomplete="off">
+                        <div class="field field-q">
+                            <label for="q" class="sr-only">O que você está buscando?</label>
+                            <input type="text" id="q" name="q" placeholder="O que você está buscando?" aria-autocomplete="list" aria-controls="q-list" enterkeyhint="search">
+                            <ul class="panel" id="q-list" role="listbox" hidden></ul>
+                        </div>
+
+                        <div class="field field-local">
+                            <label for="local" class="sr-only">Local (município)</label>
+                            <input type="text" id="local" name="local" placeholder="Local" role="combobox" aria-expanded="false" aria-controls="local-list" aria-autocomplete="list" aria-haspopup="listbox">
+                            <button type="button" class="local-clear" id="local-clear" aria-label="Limpar local" hidden><i class="fas fa-xmark"></i></button>
+                            <i class="fas fa-location-crosshairs field-ico" aria-hidden="true"></i>
+                            <ul class="panel" id="local-list" role="listbox" aria-label="Municípios com empresas cadastradas" hidden></ul>
+                        </div>
+
+                        <button type="submit" class="btn btn-green btn-search"><i class="fas fa-magnifying-glass"></i> Buscar</button>
+                    </form>
+                    <p class="search-count" id="search-count"></p>
+                </div>
+
+                <h2 class="hero-cats-title">Navegue pelas principais categorias</h2>
+                <div class="hero-cats" id="hero-cats"></div>
+            </div>
+        </section>
+
+        <!-- ========== RESULTADOS ========== -->
+        <section class="section results" id="resultados" hidden>
+            <div class="container">
+                <div class="results-head">
+                    <div>
+                        <h2 id="results-title">Resultados</h2>
+                        <div class="chips" id="active-chips"></div>
+                    </div>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-clear"><i class="fas fa-rotate-left"></i> Limpar filtros</button>
+                </div>
+                <div class="cards" id="results-grid"></div>
+                <div class="empty" id="results-empty" hidden>
+                    <i class="far fa-face-frown"></i>
+                    <h3>Nenhuma empresa encontrada</h3>
+                    <p>Tente outra palavra, outra categoria ou outro município.</p>
+                    <button type="button" class="btn btn-green btn-sm" id="btn-empty-clear">Ver todas as empresas</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== INTERESSES ========== -->
+        <section class="section" id="categorias">
+            <div class="container">
+                <div class="section-title">
+                    <h2>No que você está interessado?</h2>
+                    <p>Escolha uma categoria e veja as empresas do Tocantins.</p>
+                </div>
+                <div class="interest-grid" id="interest-grid"></div>
+            </div>
+        </section>
+
+        <!-- ========== CIDADES ========== -->
+        <section class="section alt" id="cidades">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Explore por cidade</h2>
+                    <p>Estes são os municípios onde já temos empresas cadastradas.</p>
+                </div>
+                <div class="city-chips" id="city-chips"></div>
+            </div>
+        </section>
+
+        <!-- ========== DESTAQUES ========== -->
+        <section class="section" id="destaques">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Empresas em destaque</h2>
+                    <p>Negócios que fazem a diferença no Tocantins.</p>
+                </div>
+                <div class="cards" id="featured-grid"></div>
+            </div>
+        </section>
+
+        <!-- ========== SOBRE ========== -->
+        <section class="section alt" id="sobre">
+            <div class="container about">
+                <div class="about-text">
+                    <span class="eyebrow">SOBRE O PORTAL</span>
+                    <h2>O Tocantins inteiro, a um clique de distância</h2>
+                    <p>O Portal Negócios Tocantins conecta quem procura com quem oferece: restaurantes, lojas, serviços, profissionais e muito mais, em todo o estado. Valorize o comércio local e encontre o que precisa perto de você.</p>
+                </div>
+                <ul class="steps">
+                    <li><span><i class="fas fa-magnifying-glass"></i></span><div><strong>Busque</strong><p>Digite o que precisa ou escolha uma categoria.</p></div></li>
+                    <li><span><i class="fas fa-location-dot"></i></span><div><strong>Escolha o município</strong><p>Veja só as cidades que têm empresas cadastradas.</p></div></li>
+                    <li><span><i class="fab fa-whatsapp"></i></span><div><strong>Fale direto</strong><p>Chame a empresa pelo WhatsApp ou telefone.</p></div></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ========== CADASTRAR ========== -->
+        <section class="cta" id="cadastrar">
+            <div class="container cta-inner">
+                <h2>Tem uma empresa no Tocantins?</h2>
+                <p>Cadastre seu negócio no Portal Negócios Tocantins e seja encontrado por quem está procurando.</p>
+                <div class="cta-btns" id="cta-btns"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contato">
+        <div class="container footer-grid">
+            <div>
+                <a class="logo" href="index.html">
+                    <span class="logo-mark"><i class="fas fa-location-dot"></i></span>
+                    <span class="logo-text"><strong>Negócios</strong><small>TOCANTINS</small></span>
+                </a>
+                <p class="footer-sub">Empresas, serviços e profissionais de todo o Tocantins.</p>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <p id="footer-contact"></p>
+            </div>
+        </div>
+        <div class="container copy">&copy; <span id="year"></span> Portal Negócios Tocantins. Todos os direitos reservados. <a href="admin.html" class="admin-link" rel="nofollow">Área do administrador</a></div>
+    </footer>
+
+    <script src="municipios.js"></script>
+    <script src="config.js"></script>
+    <script src="empresas.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

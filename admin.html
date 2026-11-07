@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin | Portal Negócios Tocantins</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+
+    <!-- Login -->
+    <div id="auth" class="auth-wrap">
+        <form class="auth-box" id="auth-form" autocomplete="off">
+            <div class="auth-logo"><i class="fas fa-location-dot"></i></div>
+            <h1>Admin do Portal</h1>
+            <p>Portal Negócios Tocantins<br>Digite a senha para gerenciar as empresas.</p>
+            <input type="password" id="admin-password" class="in" placeholder="Senha do administrador" autofocus>
+            <button type="submit" class="btn-primary block">Entrar</button>
+            <p id="login-error" class="err" role="alert"></p>
+            <a href="index.html" class="link-back"><i class="fas fa-arrow-left"></i> Voltar ao portal</a>
+        </form>
+    </div>
+
+    <!-- Painel -->
+    <div id="dash" hidden>
+        <header class="a-top">
+            <div class="a-brand"><i class="fas fa-location-dot"></i><span>Negócios Tocantins <small>Admin das empresas</small></span></div>
+            <div class="a-status" id="status"></div>
+            <div class="a-actions">
+                <a href="index.html?preview=1" target="_blank" class="btn-ghost"><i class="fas fa-eye"></i> <span>Ver portal (prévia)</span></a>
+                <button type="button" class="btn-ghost" id="btn-tools"><i class="fas fa-toolbox"></i> <span>Ferramentas</span></button>
+                <button type="button" class="btn-publish" id="btn-publish"><i class="fas fa-file-zipper"></i> <span>Publicar (gerar .ZIP)</span></button>
+                <button type="button" class="btn-ghost danger" id="btn-logout" title="Sair"><i class="fas fa-right-from-bracket"></i></button>
+            </div>
+        </header>
+
+        <div class="a-layout">
+            <aside class="a-list">
+                <div class="summary" id="summary"></div>
+                <button type="button" class="btn-primary block" id="btn-new"><i class="fas fa-plus"></i> Nova empresa</button>
+                <div class="list-filters">
+                    <input type="search" class="in" id="f-text" placeholder="Buscar empresa…" aria-label="Buscar empresa">
+                    <select class="in" id="f-muni" aria-label="Filtrar por município"><option value="">Todos os municípios</option></select>
+                </div>
+                <ul class="biz-list" id="biz-list"></ul>
+            </aside>
+            <main class="a-main" id="editor"></main>
+        </div>
+    </div>
+
+    <div id="modal" class="modal" hidden></div>
+    <datalist id="dl-muni"></datalist>
+    <datalist id="dl-sub"></datalist>
+
+    <script src="municipios.js"></script>
+    <script src="config.js"></script>
+    <script src="empresas.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

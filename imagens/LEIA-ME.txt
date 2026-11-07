@@ -1,0 +1,4 @@
+Pasta imagens/ — todas as logos das empresas do portal ficam aqui.
+Ao publicar pelo admin, as logos enviadas são salvas nesta pasta (logo-nome-id.png)
+e o empresas.js passa a apontar para "imagens/logo-....png".
+Você também pode colocar a logo aqui manualmente no GitHub e digitar o caminho no admin.
