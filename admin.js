@@ -78,6 +78,8 @@
         const s = $('#status');
         s.className = 'a-status ' + (dirty ? 'dirty' : 'ok');
         s.innerHTML = dirty ? '<i class="fas fa-circle-exclamation"></i> Alterações ainda não publicadas — clique em "Publicar"' : '<i class="fas fa-circle-check"></i> Tudo em dia com o que está publicado';
+        const bm = $('#save-bar-msg');
+        if (bm) { bm.className = 'msg ' + (dirty ? 'dirty' : 'ok'); bm.innerHTML = dirty ? '<i class="fas fa-circle-exclamation"></i> Há alterações não salvas — clique em "Salvar alterações"' : '<i class="fas fa-circle-check"></i> Nenhuma alteração pendente'; }
     }
 
     /* ---------- Listas auxiliares ---------- */
@@ -404,6 +406,11 @@ const EMPRESAS = ${JSON.stringify(list, null, 4)};
         location.reload();
     });
     $('#btn-publish').addEventListener('click', publish);
+    $('#btn-save').addEventListener('click', async () => {
+        const b = $('#btn-save'); b.disabled = true;
+        clearTimeout(saveTimer); persist();
+        try { await publish(); } finally { b.disabled = false; }
+    });
     window.addEventListener('beforeunload', (ev) => { if (dirty) { ev.preventDefault(); ev.returnValue = ''; } });
 
     let logged = false;

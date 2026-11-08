@@ -111,3 +111,21 @@ textarea.in { resize: vertical; min-height: 80px; }
     .a-actions .btn-ghost span { display: none; }
     .grid { grid-template-columns: 1fr; }
 }
+
+/* --- Correção: interruptores (checkbox) não podem sobrepor o texto --- */
+.f > label.sw, label.sw { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: .9rem; font-weight: 500; color: var(--text); margin: 0; line-height: 1.35; }
+label.sw > input[type=checkbox] { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none; }
+label.sw > .sw-ui { display: block; position: relative; flex: 0 0 42px; width: 42px; height: 24px; border-radius: 999px; }
+label.sw > span:not(.sw-ui) { flex: 1; min-width: 0; }
+
+/* --- Barra Salvar no final da página --- */
+.save-bar { position: sticky; bottom: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 28px; padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 -8px 24px rgba(0, 0, 0, .25); }
+.save-bar .msg { font-size: .85rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.save-bar .msg.dirty { color: #a06b00; font-weight: 600; }
+.save-bar .msg.ok { color: var(--green); }
+.btn-save { background: var(--green); color: #fff; border: none; border-radius: 10px; padding: 12px 22px; font: inherit; font-weight: 700; font-size: .95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 9px; }
+.btn-save:hover { filter: brightness(1.08); }
+.btn-save:disabled { opacity: .6; cursor: wait; }
+@media (max-width: 640px) { .save-bar { flex-direction: column; align-items: stretch; } .btn-save { justify-content: center; } }
+.a-right { padding: 0 clamp(16px, 3vw, 40px) 20px; max-width: 920px; min-width: 0; }
+.a-right .a-main { padding-left: 0; padding-right: 0; padding-bottom: 20px; }
